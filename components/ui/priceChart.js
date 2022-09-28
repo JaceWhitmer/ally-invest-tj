@@ -4,7 +4,6 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import axios from "axios";
 import * as dayjs from "dayjs";
 import { sma } from "technicalindicators";
-import { ConstructionOutlined } from "@mui/icons-material";
 
 const PriceChart = (props) => {
   //   const ma = sma({
@@ -16,9 +15,10 @@ const PriceChart = (props) => {
   const { ticker, points } = props;
   console.log("points", points);
   const [ohlcOptions, setOhlcOptions] = useState({
-    annotations: {
-      points: points,
-    },
+    // annotations: {
+    //     position: "front",
+    //     points: props.points
+    // },
     chart: {
       type: "candlestick",
       height: 250,
@@ -54,6 +54,16 @@ const PriceChart = (props) => {
       show: false,
     },
   });
+
+  useEffect(() => {
+    setOhlcOptions({
+      ...ohlcOptions,
+      annotations: {
+        position: "front",
+        points: props.points,
+      },
+    });
+  }, [props.points]);
   //   const [volumeOptions, setVolumeOptions] = useState({
   //     chart: {
   //       height: 160,
@@ -150,15 +160,11 @@ const PriceChart = (props) => {
       console.log("maDates", maDates);
       console.log(ma);
       const result = ma.reduce((result, field, index) => {
-        let obj = {};
         let date = maDates[index];
-        date = date.toString();
-        // obj[date] = field;
         result.push({ x: date, y: field });
         return result;
       }, []);
 
-      //   let x = result.map({});
       console.log("result", result);
 
       setOhlcSeries([

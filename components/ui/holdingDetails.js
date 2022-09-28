@@ -53,7 +53,7 @@ const HoldingDetails = (props) => {
     getQuote();
   }, [ticker]);
 
-  console.log(trades);
+  //   console.log(trades);
 
   return (
     <DetilContainer>

@@ -59,10 +59,10 @@ const Ticker = ({ accounts }) => {
         ({ date, transaction, amount }) =>
           [
             {
-              x: new Date(date).toISOString(),
+              x: new Date(date).getTime(),
               y: parseFloat(transaction.price),
               marker: {
-                size: 1,
+                size: 0,
                 // shape: "square",
               },
               label: {
