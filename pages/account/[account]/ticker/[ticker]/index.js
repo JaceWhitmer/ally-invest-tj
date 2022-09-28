@@ -59,7 +59,7 @@ const Ticker = ({ accounts }) => {
         ({ date, transaction, amount }) =>
           [
             {
-              x: dayjs(new Date(date)).format("MMM DD HH:mm"),
+              x: new Date(date).toISOString(),
               y: parseFloat(transaction.price),
               marker: {
                 size: 1,

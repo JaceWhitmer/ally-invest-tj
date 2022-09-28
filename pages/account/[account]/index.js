@@ -41,7 +41,9 @@ const Account = (props) => {
           </div>
           <HoldingsSection>
             {result.accountholdings.holding.map((position) => {
-              console.log(position);
+              {
+                /* console.log(position); */
+              }
               return (
                 <HoldingContainer
                   id={position.instrument.sym}

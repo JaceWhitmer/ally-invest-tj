@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     const response = await yahooFinance.historical(
       {
         symbol: ticker,
-        from: `${yyyy - 2}-${mm}-${dd}`,
+        from: `${yyyy - 5}-${mm}-${dd}`,
         to: today,
         period: "d",
       },
@@ -31,13 +31,17 @@ export default async function handler(req, res) {
     let chartData = response.map(
       ({ date, open, high, low, close, adjClose, volume }) => [
         {
-          x: date,
+          x: new Date(date),
           y: [open, high, low, close],
         },
         {
-          x: date,
-          y: volume / 1000000,
+          x: new Date(date),
+          y: volume,
         },
+        // {
+        //   x: date,
+        //   y: close,
+        // },
       ]
     );
     chartData = chartData.reverse();
